@@ -13,10 +13,9 @@ const router = express.Router();
 router.route('/nbaServicesPG') // actually localhost:3000/api/foodServicesPG
   .get(async (req, res) => {
     try {
-      const url = 'https://api-nba-v1.p.rapidapi.com/players';
+      const url = 'https://api-nba-v1.p.rapidapi.com/seasons';
       const data = await fetch(url, {
         method: 'GET',
-        body: {team: '1', season: '2021'},
         headers: {
           'X-RapidAPI-Key': '4f97ce439dmshc2e85d907e86424p17ef73jsna492d20dc9ec'
         }
