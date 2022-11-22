@@ -1,5 +1,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
+
 const router = express.Router();
 
 //
@@ -13,13 +14,27 @@ const router = express.Router();
 router.route('/nbaServicesPG') // actually localhost:3000/api/foodServicesPG
   .get(async (req, res) => {
     try {
-      const url = 'https://api-nba-v1.p.rapidapi.com/seasons';
+      const url = 'https://api-nba-v1.p.rapidapi.com/teams/statistics?id=2&season=2020';
       const data = await fetch(url, {
         method: 'GET',
         headers: {
-          'X-RapidAPI-Key': '4f97ce439dmshc2e85d907e86424p17ef73jsna492d20dc9ec'
+          'X-RapidAPI-Key': '4f97ce439dmshc2e85d907e86424p17ef73jsna492d20dc9ec',
+		      'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
         }
       });
+      // const options = {
+      //   method: 'GET',
+      //   headers: {
+      //     'X-RapidAPI-Key': '4f97ce439dmshc2e85d907e86424p17ef73jsna492d20dc9ec',
+      //     'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
+      //   }
+      // };
+
+      // const data = fetch('https://api-nba-v1.p.rapidapi.com/players?team=1&season=2021', options)
+      //   .then((response) => response.json())
+      //   .then((response) => console.log(response))
+      //   .catch((err) => console.error(err));
+
       const json = await data.json();
       console.log(json);
 
