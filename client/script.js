@@ -24,6 +24,7 @@ async function shapeDataForLineChart(array) {
     return collection;
   }, {});
 }
+
 async function getData() {
   const url = 'https://api-nba-v1.p.rapidapi.com/players?team=1&season=2021';
   // const url = 'https://api-nba-v1.p.rapidapi.com/teams/statistics?id=2&season=2020';
