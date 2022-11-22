@@ -85,17 +85,6 @@ function markerPlace(array, map) {
   });
 }
 
-async function shapeDataForLineChart(array) {
-  return array.reduce((collection, item) => {
-    if (!collection[item.category]) {
-      collection[item.category] = [item];
-    } else {
-      collection[item.category].push(item);
-    }
-    return collection;
-  }, {});
-}
-
 function initChart(chart, object) {
   const labels = Object.keys(object);
   const info = Object.keys(object).map((item) => object[item].length);
@@ -119,6 +108,17 @@ function initChart(chart, object) {
     targetElement,
     config
   );
+}
+
+async function shapeDataForLineChart(array) {
+  return array.reduce((collection, item) => {
+    if (!collection[item.category]) {
+      collection[item.category] = [item];
+    } else {
+      collection[item.category].push(item);
+    }
+    return collection;
+  }, {});
 }
 
 function changeChart(chart, dataObject) {
