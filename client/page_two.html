@@ -14,6 +14,8 @@
     <!-- <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
     crossorigin=""></script> -->
+    
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -24,28 +26,29 @@
 
         <div class="container">
 
-            <div class="left_section">
-                <h3>Form Inputs</h3>
-                <form action="/api" class="main_form">
+            
+
+
+            <div class="right_section">
+                <h3>Page 2 Information</h3>
+
+                <div class="chart_container">
+                    <canvas id="myChart"></canvas>
+                  </div>
+                  <form action="/api" class="main_form">
                     <label for="resto"></label>
                     <input type="text" name="resto" id="resto"/>
                     <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                     <button type="submit" id="get_resto">Select Team ID</button>
                 </form>
-            </div>
 
+                
 
-            <div class="right_section">
-                <h3> Player Stat Chart</h3>
-                <div class="chart_container">
-                    <canvas id="myChart"></canvas>
-                  </div>
+            
+                
 
-                <!-- <div id="map" class="box"></div> -->
-                <div class="box" id="restaurant_list">
-                   Empty 
-                </div>
                 <div><a href="index.html">Home Page Link</a></div>
+
             </div>
 
         </div>
@@ -54,6 +57,6 @@
         <footer class="footer">GROUP GITHUB ACCOUNT: <a href="https://github.com/Jhenness-13/Group14-Final-Project-NBA-endpoint"> Jhenness-13/Group14-Final-Project-NBA-endpoint  </a>
         </footer>
     </div>
-    <script src="script.js"></script>
+    
 </body>
 </html>

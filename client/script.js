@@ -3,6 +3,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 
+// npm install plotly.js-dist is needed for this script to work
+
 function processRequest(data) {
   const heights = [];
   const weights = [];
@@ -14,6 +16,30 @@ function processRequest(data) {
   }
   return weightsHeights;
 }
+
+function createArrays(data) {
+  const x = [];
+  const y = [];
+  for (let i = 0; i < data.length; i++) {
+    x.push(data[i][0]);
+    y.push(data[i][1]);
+  }
+  return [x, y];
+}
+
+function createPlot(data) {
+  const trace1 = {
+    x: data[0],
+    y: data[1],
+    mode: 'markers',
+    type: 'scatter'
+  };
+  const plotData = [trace1];
+
+  Plotly.newPlot('myDiv', plotData);
+}
+
+// NOT USED
 async function shapeDataForLineChart(array) {
   return array.reduce((collection, item) => {
     if (!collection[item.category]) {
@@ -50,9 +76,13 @@ async function mainEvent() {
   const dataManipulated = processRequest(data.response);
   // const shapedData = shapeDataForLineChart(data.response);
   console.log(dataManipulated);
+  const x_and_y = createArrays(dataManipulated);
+  console.log(x_and_y);
+
+  
   // console.log(data);
 }
-//edit
+// edit
 /*
       This last line actually runs first!
       It's calling the 'mainEvent' function at line 57
