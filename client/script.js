@@ -38,21 +38,19 @@ function createPlot(data) {
 
   Plotly.newPlot('myDiv', plotData);
 }
+function injectHMTL(data) {
+  console.log(data);
+  const lst = document.createElement('ol');
+  data.forEach((item) =>{
+    const el = document.createElement('li');
+    el.innerText = item[0]
+  })
 
-// NOT USED
-async function shapeDataForLineChart(array) {
-  return array.reduce((collection, item) => {
-    if (!collection[item.category]) {
-      collection[item.category] = [item];
-    } else {
-      collection[item.category].push(item);
-    }
-    return collection;
-  }, {});
 }
 
-async function getData() {
-  const url = 'https://api-nba-v1.p.rapidapi.com/players?team=1&season=2021';
+async function getData(param) {
+  // const team_number = param
+  const url = 'https://api-nba-v1.p.rapidapi.com/players?team=' + param + '&season=2021';
   // const url = 'https://api-nba-v1.p.rapidapi.com/teams/statistics?id=2&season=2020';
   // const request = await fetch(url);
   const data = await fetch(url, {
@@ -63,25 +61,27 @@ async function getData() {
     }
   });
   const json = await data.json();
-  // const reply = json.filter((item) => Boolean(item.geocoded_column_1)).filter((item) => Boolean(item.name));
   return json;
 }
+
 async function mainEvent() {
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
-  const submit = document.querySelector('#get_resto');
+  const submit = document.querySelector('button[type="submit"]');
   const loadAnimation = document.querySelector('.lds-ellipsis');
   loadAnimation.classList.remove('lds-ellipsis');
   loadAnimation.classList.add('lds-ellipsis-hidden');
-  const data = await getData();
-  const dataManipulated = processRequest(data.response);
-  // const shapedData = shapeDataForLineChart(data.response);
-  console.log(dataManipulated);
-  const x_and_y = createArrays(dataManipulated);
-  console.log(x_and_y);
+  const data = await getData(2);
 
-  
+  form.addEventListener('submit', (submitEvent) => {
+    const dataManipulated = processRequest(data.response);
+    const x_and_y = createArrays(dataManipulated);
+    submitEvent.preventDefault();
+    injectHMTL(x_and_y)
+  });
+
   // console.log(data);
 }
+
 // edit
 /*
       This last line actually runs first!
