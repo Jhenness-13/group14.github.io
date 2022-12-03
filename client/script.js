@@ -137,7 +137,6 @@ async function mainEvent() {
   // initChart(chartTarget, cleanValues);
   const data = await getData(2);
   
-
   form.addEventListener('submit', (submitEvent) => {
     const dataManipulated = processRequest(data.response);
     const x_and_y = createArrays(dataManipulated);
