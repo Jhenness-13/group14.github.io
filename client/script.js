@@ -5,6 +5,7 @@
 
 // npm install plotly.js-dist is needed for this script to work
 
+
 function processRequest(data) {
   const heights = [];
   const weights = [];
@@ -38,19 +39,81 @@ function createPlot(data) {
 
   Plotly.newPlot('myDiv', plotData);
 }
+function removeNullValues(data) {
+  console.log(data[1])
+  let x = [];
+  let y = [];
+  let x1 = [];
+  let y1 = [];
+  console.log(data[0].length)
+  for (let i = 0; i < data[0].length; i++) {
+    if (data[0][i] != null) {
+      x.push(data[0][i]);
+      y.push(data[1][i])
+    }
+  }
+
+  for (let i = 0; i < y.length; i++) {
+    if (y[i] != null) {
+      x1.push(x[i]);
+      y1.push(y[i]);
+    }
+  }
+  return [x1,y1]
+}
+
 function injectHMTL(data) {
   console.log(data);
-  const lst = document.createElement('ol');
-  data.forEach((item) =>{
-    const el = document.createElement('li');
-    el.innerText = item[0]
-  })
+  const target = document.querySelector('#restaurant_list');
 
+  // target.innerHTML ='<script>'
+  // target.innerHTML +="TESTER = document.getElementById('tester');"
+  // target.innerHTML +='Plotly.newPlot( TESTER, [{'
+  // target.innerHTML +='x: [1, 2, 3, 4, 5],'
+  // target.innerHTML +='y: [1, 2, 4, 8, 16] }], {'
+  // target.innerHTML +='margin: { t: 0 } } );'
+  // target.innerHTML +='</script>'
+  
+  target.innerHTML = data[0];
+  target.innerHTML += '\n';
+  target.innerHTML += data[1];
+
+  // const lst = document.createElement('ol');
+  // target.appendChild(lst);
+  // data.forEach((item) => {
+  //   const el = document.createElement('li');
+  //   el.innerText = data[0];
+  //   lst.appendChild(el);
+  // });
+}
+
+function initChart(chart, data_) {
+  const labels = data_[0];
+  const info = data_[1];
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'h',
+      backgroundColor: 'rgb(255,255,255)',
+      borderColor:'rgb(255,255,255)',
+      data: info
+    }]
+  };
+  
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+  return new Chart(
+    chart,
+    config
+  );
 }
 
 async function getData(param) {
   // const team_number = param
-  const url = 'https://api-nba-v1.p.rapidapi.com/players?team=' + param + '&season=2021';
+  const url = `https://api-nba-v1.p.rapidapi.com/players?team=${param}&season=2021`;
   // const url = 'https://api-nba-v1.p.rapidapi.com/teams/statistics?id=2&season=2020';
   // const request = await fetch(url);
   const data = await fetch(url, {
@@ -70,13 +133,19 @@ async function mainEvent() {
   const loadAnimation = document.querySelector('.lds-ellipsis');
   loadAnimation.classList.remove('lds-ellipsis');
   loadAnimation.classList.add('lds-ellipsis-hidden');
+  const chartTarget = document.querySelector('#my_chart')
+  initChart(chartTarget);
   const data = await getData(2);
+  
 
   form.addEventListener('submit', (submitEvent) => {
     const dataManipulated = processRequest(data.response);
     const x_and_y = createArrays(dataManipulated);
+    const cleanValues = removeNullValues(x_and_y);
     submitEvent.preventDefault();
-    injectHMTL(x_and_y)
+    const myChart = initChart(chartTarget, cleanValues)
+    // injectHMTL(cleanValues)
+    // initChart(cleanValues);
   });
 
   // console.log(data);

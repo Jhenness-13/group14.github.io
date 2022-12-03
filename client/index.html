@@ -16,6 +16,9 @@
     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
     crossorigin=""></script> -->
     <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+    <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 </head>
 <body>
     <div class="wrapper">
@@ -36,16 +39,18 @@
                 </form>
             </div>
 
-            <div id="tester" style="width:600px;height:250px;">
-                <script>
+            <canvas id="my_chart">
+                
+                
+                <!-- <script>
                     TESTER = document.getElementById('tester');
                     Plotly.newPlot( TESTER, [{
                     x: [1, 2, 3, 4, 5],
                     y: [1, 2, 4, 8, 16] }], {
                     margin: { t: 0 } } );
-                </script>
+                </script> -->
             
-            </div>
+            </canvas>
 
             <div class="right_section">
                 <h3> Player Stat Chart</h3>
@@ -55,7 +60,7 @@
 
                 <!-- <div id="map" class="box"></div> -->
                 <div class="box" id="restaurant_list">
-                   Empty Box
+                    Empty!
                 </div>
                 <div><a href="page_two.html">Page 2 Link</a></div>
             </div>
