@@ -5,7 +5,8 @@
 
 // npm install plotly.js-dist is needed for this script to work
 
-
+//REQUEST IS BEING PROCESSED AND TRANSFORMED INTO 
+//ARRAYS
 function processRequest(data) {
   const heights = [];
   const weights = [];
@@ -40,16 +41,16 @@ function createPlot(data) {
   Plotly.newPlot('myDiv', plotData);
 }
 function removeNullValues(data) {
-  console.log(data[1])
-  let x = [];
-  let y = [];
-  let x1 = [];
-  let y1 = [];
-  console.log(data[0].length)
+  console.log(data[1]);
+  const x = [];
+  const y = [];
+  const x1 = [];
+  const y1 = [];
+  console.log(data[0].length);
   for (let i = 0; i < data[0].length; i++) {
     if (data[0][i] != null) {
       x.push(data[0][i]);
-      y.push(data[1][i])
+      y.push(data[1][i]);
     }
   }
 
@@ -59,7 +60,7 @@ function removeNullValues(data) {
       y1.push(y[i]);
     }
   }
-  return [x1,y1]
+  return [x1, y1];
 }
 
 function injectHMTL(data) {
@@ -73,7 +74,7 @@ function injectHMTL(data) {
   // target.innerHTML +='y: [1, 2, 4, 8, 16] }], {'
   // target.innerHTML +='margin: { t: 0 } } );'
   // target.innerHTML +='</script>'
-  
+
   target.innerHTML = data[0];
   target.innerHTML += '\n';
   target.innerHTML += data[1];
@@ -87,35 +88,68 @@ function injectHMTL(data) {
   // });
 }
 
+// function initChart(chart, data_) {
+//   const labels = data_[0];
+//   const info = data_[1];
+//   const data = {
+//     labels: labels,
+//     datasets: [{
+//       label: 'h',
+//       backgroundColor: 'rgb(255,255,255)',
+//       borderColor: 'rgb(255,255,255)',
+//       data: info
+//     }]
+//   };
+
+//   const config = {
+//     type: 'line',
+//     data: data,
+//     options: {}
+//   };
+//   return new Chart(
+//     chart,
+//     config
+//   );
+// }
+
 function initChart(chart, data_) {
   const labels = data_[0];
   const info = data_[1];
   const data = {
-    labels: labels,
     datasets: [{
-      label: 'h',
-      backgroundColor: 'rgb(255,255,255)',
-      borderColor:'rgb(255,255,255)',
-      data: info
+      label: 'Scatter Dataset',
+      data: data_,
+      backgroundColor: 'rgb(255, 99, 132)'
     }]
   };
-  
   const config = {
-    type: 'line',
+    type: 'scatter',
     data: data,
-    options: {}
+    options: {
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom'
+        }
+      }
+    }
   };
   return new Chart(
     chart,
     config
   );
 }
+function scatterPoints(data) {
+  const arr = [];
+  for (let i = 0; i < data[0].length; i++) {
+    const x_y_comp = {x: data[0][i], y: data[1][i]};
+    arr.push(x_y_comp);
+  }
+  return arr;
+}
 
 async function getData(param) {
-  // const team_number = param
   const url = `https://api-nba-v1.p.rapidapi.com/players?team=${param}&season=2021`;
-  // const url = 'https://api-nba-v1.p.rapidapi.com/teams/statistics?id=2&season=2020';
-  // const request = await fetch(url);
   const data = await fetch(url, {
     method: 'GET',
     headers: {
@@ -126,6 +160,12 @@ async function getData(param) {
   const json = await data.json();
   return json;
 }
+function holdValue(param) {
+  return 1
+}
+function returnValue(param = 1) {
+  return param
+}
 
 async function mainEvent() {
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
@@ -134,20 +174,22 @@ async function mainEvent() {
   loadAnimation.classList.remove('lds-ellipsis');
   loadAnimation.classList.add('lds-ellipsis-hidden');
   const chartTarget = document.querySelector('#my_chart');
-  // initChart(chartTarget, cleanValues);
-  const data = await getData(2);
-  
+  const data = await getData(returnValue());
+
+  form.addEventListener('input', (event) => {
+    console.log(event.target.value);
+    holdValue(event.target.value);
+    let data = getData(1);
+  });
+
   form.addEventListener('submit', (submitEvent) => {
     const dataManipulated = processRequest(data.response);
     const x_and_y = createArrays(dataManipulated);
     const cleanValues = removeNullValues(x_and_y);
+    const test = scatterPoints(cleanValues);
     submitEvent.preventDefault();
-    initChart(chartTarget, cleanValues);
-    // injectHMTL(cleanValues)
-    // initChart(cleanValues);
+    initChart(chartTarget, test);
   });
-
-  // console.log(data);
 }
 
 // edit
