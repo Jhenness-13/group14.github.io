@@ -64,28 +64,28 @@ function removeNullValues(data) {
 }
 
 function injectHMTL(data) {
-  console.log(data);
-  const target = document.querySelector('#restaurant_list');
+  // console.log(data);
+  // const target = document.querySelector('#restaurant_list');
 
-  // target.innerHTML ='<script>'
-  // target.innerHTML +="TESTER = document.getElementById('tester');"
-  // target.innerHTML +='Plotly.newPlot( TESTER, [{'
-  // target.innerHTML +='x: [1, 2, 3, 4, 5],'
-  // target.innerHTML +='y: [1, 2, 4, 8, 16] }], {'
-  // target.innerHTML +='margin: { t: 0 } } );'
-  // target.innerHTML +='</script>'
+  // // target.innerHTML ='<script>'
+  // // target.innerHTML +="TESTER = document.getElementById('tester');"
+  // // target.innerHTML +='Plotly.newPlot( TESTER, [{'
+  // // target.innerHTML +='x: [1, 2, 3, 4, 5],'
+  // // target.innerHTML +='y: [1, 2, 4, 8, 16] }], {'
+  // // target.innerHTML +='margin: { t: 0 } } );'
+  // // target.innerHTML +='</script>'
 
-  target.innerHTML = data[0];
-  target.innerHTML += '\n';
-  target.innerHTML += data[1];
+  // target.innerHTML = data[0];
+  // target.innerHTML += '\n';
+  // target.innerHTML += data[1];
 
-  // const lst = document.createElement('ol');
-  // target.appendChild(lst);
-  // data.forEach((item) => {
-  //   const el = document.createElement('li');
-  //   el.innerText = data[0];
-  //   lst.appendChild(el);
-  // });
+  // // const lst = document.createElement('ol');
+  // // target.appendChild(lst);
+  // // data.forEach((item) => {
+  // //   const el = document.createElement('li');
+  // //   el.innerText = data[0];
+  // //   lst.appendChild(el);
+  // // });
 }
 
 // function initChart(chart, data_) {
@@ -179,7 +179,6 @@ async function mainEvent() {
   form.addEventListener('input', (event) => {
     console.log(event.target.value);
     holdValue(event.target.value);
-    let data = getData(event.target.value);
   });
 
   form.addEventListener('submit', (submitEvent) => {
