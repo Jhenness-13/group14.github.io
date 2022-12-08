@@ -63,55 +63,6 @@ function removeNullValues(data) {
   return [x1, y1];
 }
 
-function injectHMTL(data) {
-  // console.log(data);
-  // const target = document.querySelector('#restaurant_list');
-
-  // // target.innerHTML ='<script>'
-  // // target.innerHTML +="TESTER = document.getElementById('tester');"
-  // // target.innerHTML +='Plotly.newPlot( TESTER, [{'
-  // // target.innerHTML +='x: [1, 2, 3, 4, 5],'
-  // // target.innerHTML +='y: [1, 2, 4, 8, 16] }], {'
-  // // target.innerHTML +='margin: { t: 0 } } );'
-  // // target.innerHTML +='</script>'
-
-  // target.innerHTML = data[0];
-  // target.innerHTML += '\n';
-  // target.innerHTML += data[1];
-
-  // // const lst = document.createElement('ol');
-  // // target.appendChild(lst);
-  // // data.forEach((item) => {
-  // //   const el = document.createElement('li');
-  // //   el.innerText = data[0];
-  // //   lst.appendChild(el);
-  // // });
-}
-
-// function initChart(chart, data_) {
-//   const labels = data_[0];
-//   const info = data_[1];
-//   const data = {
-//     labels: labels,
-//     datasets: [{
-//       label: 'h',
-//       backgroundColor: 'rgb(255,255,255)',
-//       borderColor: 'rgb(255,255,255)',
-//       data: info
-//     }]
-//   };
-
-//   const config = {
-//     type: 'line',
-//     data: data,
-//     options: {}
-//   };
-//   return new Chart(
-//     chart,
-//     config
-//   );
-// }
-
 function initChart(chart, data_) {
   const labels = data_[0];
   const info = data_[1];
