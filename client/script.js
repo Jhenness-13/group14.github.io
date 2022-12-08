@@ -179,7 +179,7 @@ async function mainEvent() {
   form.addEventListener('input', (event) => {
     console.log(event.target.value);
     holdValue(event.target.value);
-    let data = getData(1);
+    let data = getData(event.target.value);
   });
 
   form.addEventListener('submit', (submitEvent) => {
