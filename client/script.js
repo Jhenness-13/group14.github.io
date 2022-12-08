@@ -133,8 +133,8 @@ async function mainEvent() {
   const loadAnimation = document.querySelector('.lds-ellipsis');
   loadAnimation.classList.remove('lds-ellipsis');
   loadAnimation.classList.add('lds-ellipsis-hidden');
-  const chartTarget = document.querySelector('#my_chart')
-  initChart(chartTarget);
+  const chartTarget = document.querySelector('#my_chart');
+  // initChart(chartTarget, cleanValues);
   const data = await getData(2);
   
 
@@ -143,7 +143,7 @@ async function mainEvent() {
     const x_and_y = createArrays(dataManipulated);
     const cleanValues = removeNullValues(x_and_y);
     submitEvent.preventDefault();
-    const myChart = initChart(chartTarget, cleanValues)
+    initChart(chartTarget, cleanValues);
     // injectHMTL(cleanValues)
     // initChart(cleanValues);
   });
