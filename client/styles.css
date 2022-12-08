@@ -153,7 +153,7 @@ form input {
   }
   
   .right_section {
-  background-color: rgb(174 18 18 / 70%);
+  background-color: rgba(174, 18, 18, 0.077);
   flex: 1 2 auto;
   margin: 1rem;
   align-items: center;
