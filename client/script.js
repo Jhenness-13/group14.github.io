@@ -63,55 +63,6 @@ function removeNullValues(data) {
   return [x1, y1];
 }
 
-// function injectHMTL(data) {
-//   console.log(data);
-//   const target = document.querySelector('#restaurant_list');
-
-//   // target.innerHTML ='<script>'
-//   // target.innerHTML +="TESTER = document.getElementById('tester');"
-//   // target.innerHTML +='Plotly.newPlot( TESTER, [{'
-//   // target.innerHTML +='x: [1, 2, 3, 4, 5],'
-//   // target.innerHTML +='y: [1, 2, 4, 8, 16] }], {'
-//   // target.innerHTML +='margin: { t: 0 } } );'
-//   // target.innerHTML +='</script>'
-
-//   target.innerHTML = data[0];
-//   target.innerHTML += '\n';
-//   target.innerHTML += data[1];
-
-//   // const lst = document.createElement('ol');
-//   // target.appendChild(lst);
-//   // data.forEach((item) => {
-//   //   const el = document.createElement('li');
-//   //   el.innerText = data[0];
-//   //   lst.appendChild(el);
-//   // });
-// }
-
-// // function initChart(chart, data_) {
-// //   const labels = data_[0];
-// //   const info = data_[1];
-// //   const data = {
-// //     labels: labels,
-// //     datasets: [{
-// //       label: 'h',
-// //       backgroundColor: 'rgb(255,255,255)',
-// //       borderColor: 'rgb(255,255,255)',
-// //       data: info
-// //     }]
-// //   };
-
-// //   const config = {
-// //     type: 'line',
-// //     data: data,
-// //     options: {}
-// //   };
-// //   return new Chart(
-// //     chart,
-// //     config
-// //   );
-// // }
-
 function initChart(chart, data_) {
   const labels = data_[0];
   const info = data_[1];
@@ -119,7 +70,7 @@ function initChart(chart, data_) {
     datasets: [{
       label: 'Scatter Dataset',
       data: data_,
-      backgroundColor: 'rgb(255, 99, 132)'
+      backgroundColor: 'rgb(255, 99, 132)',
     }]
   };
   const config = {
@@ -139,6 +90,7 @@ function initChart(chart, data_) {
     config
   );
 }
+
 function scatterPoints(data) {
   const arr = [];
   for (let i = 0; i < data[0].length; i++) {
@@ -157,15 +109,52 @@ async function getData(param) {
       'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
     }
   });
-  const json = await data.json();
+  let json = await data.json();
   return json;
 }
-function holdValue(param) {
-  return 1
+
+
+//SETTING A GLOBAL VARIABLE THAT WILL BE CHANGED AFTER INPUTTING VALUE
+var x = 1;
+var data1 = 0;
+var data2 = 0;
+
+function submitE(data) {
+  console.log(data);
+  var a = data;
+  if (a == "Team 1") {
+    x = 1;
+  }
+  if (a == "Team 2") {
+    x =2;
+  }
+  if (a == "Team 4") {
+    x =4;
+  }
+  if (a == "Team 5") {
+    x =5;
+  }
+
+  // x = a;
 }
-function returnValue(param = 1) {
-  return param
+
+async function newFunc() {
+
+  data2 = await getData(x);
+  console.log("newFunc")
+  console.log(data2)
+  return data2
 }
+
+// async function initData() {
+//   var data1 = await getData(x);
+//   return data1
+// }
+
+// function done() {
+//   return initData()
+// }
+
 
 async function mainEvent() {
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
@@ -174,16 +163,25 @@ async function mainEvent() {
   loadAnimation.classList.remove('lds-ellipsis');
   loadAnimation.classList.add('lds-ellipsis-hidden');
   const chartTarget = document.querySelector('#my_chart');
-  const data = await getData(returnValue());
+  // const data1 = await getData(x);
+  var data1 = await getData(x);
+  console.log(data1)
 
   form.addEventListener('input', (event) => {
     console.log(event.target.value);
-    holdValue(event.target.value);
-    let data = getData(event.target.value);
+    submitE(event.target.value);
+    newFunc()
   });
 
   form.addEventListener('submit', (submitEvent) => {
-    const dataManipulated = processRequest(data.response);
+    console.log("DATA BELOW")
+    console.log(data1)
+    if (data2 === 0) {
+      var dataManipulated = processRequest(data1.response);
+    }
+    else {
+      var dataManipulated = processRequest(data2.response);
+    }
     const x_and_y = createArrays(dataManipulated);
     const cleanValues = removeNullValues(x_and_y);
     const test = scatterPoints(cleanValues);

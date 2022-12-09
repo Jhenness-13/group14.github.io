@@ -33,22 +33,42 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                 <h3>Form Inputs</h3>
                 <form action="/api" class="main_form">
                     <label for="resto"></label>
-                    <input type="text" name="resto" id="resto"/>
+
+
+                    <div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
+                        <select style="position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;"
+                                onchange="document.getElementById('resto').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                          <option></option>
+                          <option value="Team 1">Team 1</option>
+                          <option value="Team 2">Team 2</option>
+                          <option value="Team 4">Team 4</option>
+                          <option value="Team 5">Team 5</option>
+                        </select>
+                        <input type="text" name="resto" id="resto" 
+                               placeholder="Choose a Team" onfocus="this.select()"
+                               style="position:absolute;top:0px;left:0px;width:183px;width:180px\9;#width:180px;height:23px; height:21px\9;#height:18px;border:1px solid #556;"  >
+                        <input name="idValue" id="idValue" type="hidden">
+                      </div>
+
+
+                    <!-- <input type="text" name="resto" id="resto"/> -->
                     <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                    <button type="submit" id="get_resto">Select Team ID</button>
-                    <div><a href="page_two.html">Page 2 Link</a></div>
+                    <button type="submit" id="get_resto">Show Weight vs Height</button>
                 </form>
+                
             </div>
+
+            
+
+            
+
             <div class="right_section">
-                <h3> Player Stat Chart</h3>
+                <h3> Player weight</h3>
                 <canvas id="my_chart" style="width:300px;height:100px;">
+                
                 </canvas>
-                <div class="chart_container">
-                    <canvas id="myChart"></canvas>
-                  </div>
-                <!-- <div id="map" class="box"></div> -->
-                <div class="box" id="restaurant_list">
-                </div>
+                
+                <div><a href="page_two.html">About</a></div>
             </div>
 
         </div>
