@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group 14 NBA API Project INST377</title>
+    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+     crossorigin=""/>-->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+    crossorigin=""></script> -->
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+    <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <h1>Group 14 NBA API Project</h1>
+        </header>
+
+
+        <div class="container">
+
+            <div class="left_section">
+                <h3>Form Inputs</h3>
+                <form action="/api" class="main_form">
+                    <label for="resto"></label>
+
+
+                    <div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
+                        <select style="position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;"
+                                onchange="document.getElementById('resto').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                          <option></option>
+                          <option value="Team 1">Team 1</option>
+                          <option value="Team 2">Team 2</option>
+                          <option value="Team 4">Team 4</option>
+                          <option value="Team 5">Team 5</option>
+                        </select>
+                        <input type="text" name="resto" id="resto" 
+                               placeholder="Choose a Team" onfocus="this.select()"
+                               style="position:absolute;top:0px;left:0px;width:183px;width:180px\9;#width:180px;height:23px; height:21px\9;#height:18px;border:1px solid #556;"  >
+                        <input name="idValue" id="idValue" type="hidden">
+                      </div>
+
+
+                    <!-- <input type="text" name="resto" id="resto"/> -->
+                    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    <button type="submit" id="get_resto">Show Weight vs Height</button>
+                </form>
+                
+            </div>
+
+            
+
+            
+
+            <div class="right_section">
+                <h3> Player weight</h3>
+                <canvas id="my_chart" style="width:300px;height:100px;">
+                
+                </canvas>
+                
+                <div><a href="page_two.html">About</a></div>
+            </div>
+
+        </div>
+
+
+
+        <footer class="footer">GROUP GITHUB ACCOUNT: <a href="https://github.com/Jhenness-13/Group14-Final-Project-NBA-endpoint"> Jhenness-13/Group14-Final-Project-NBA-endpoint  </a>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    
+</body>
+</html>
